@@ -3,6 +3,16 @@
     "@parcel/transformer-sass": "^2.8.0",
     "@parcel/transformer-typescript-tsc": "^2.8.0",
     "@parcel/validator-typescript": "^2.8.0",
-    "parcel": "^2.8.0"
+    "@types/jest": "^29.2.6",
+    "jest": "^29.4.0",
+    "parcel": "^2.8.0",
+    "ts-jest": "^29.0.5"
+  },
+  "scripts": {
+    "test": "npx jest --watchAll", 
+    "runParcel": "npx parcel src/index.html --no-cache"
+  },
+  "jest": {
+    "preset": "ts-jest"
   }
 }
