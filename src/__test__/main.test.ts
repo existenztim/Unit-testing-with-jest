@@ -33,6 +33,50 @@ test("Should make toogleTodo call functions ",()=>{
 })
 
 /**
+ * Testing function "createNewTodo"
+ */
+
+describe("Scenarios for createNewTodo based on todo:Text length",()=>{
+    
+    test("Should create new todo and call createHtml()", () => {
+
+        const spyCreateHtml = jest.spyOn(main, "createHtml").mockReturnValue();
+        const spyDisplayError = jest.spyOn(main, "displayError").mockReturnValue();
+   
+        const todoText:string = 'Success testing'; //has to be longer than 2 letter to success
+        const todoList: Todo[] = [];
+        const result = func.addTodo(todoText, todoList);
+
+        main.createNewTodo(todoText, todoList);
+    
+        expect(spyCreateHtml).toHaveBeenCalled();
+        expect(spyCreateHtml).toHaveBeenCalledTimes(1);
+        expect(spyDisplayError).toBeCalledTimes(0);
+        expect(result.error).toBe("");
+   });
+   
+   test("Should not create new todo and call displayError()", () => {
+
+        const spyCreateHtml = jest.spyOn(main, "createHtml").mockReturnValue();
+        const spyDisplayError = jest.spyOn(main, "displayError").mockReturnValue();
+
+        const todoText:string = 'no'; //has to be longer than 2 letter to success
+        const todoList: Todo[] = [];
+        const result = func.addTodo(todoText, todoList);
+
+        main.createNewTodo(todoText, todoList);
+    
+        expect(spyDisplayError).toHaveBeenCalled();
+        expect(spyDisplayError).toHaveBeenCalledTimes(1);
+        expect(spyDisplayError).toHaveBeenCalledWith(result.error, true);
+        expect(result.error).toBe("Du måste ange minst tre bokstäver");
+        expect(spyCreateHtml).toBeCalledTimes(0);
+   });
+   
+});
+
+
+/**
  * Testing function "displayError"
  */
 

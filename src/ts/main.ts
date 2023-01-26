@@ -22,7 +22,7 @@ document.getElementById("clearTodos")?.addEventListener("click", () => {
   }
 );
 
-export function createNewTodo(todoText: string, todos: Todo[]) { 
+export function createNewTodo(todoText: string, todos: Todo[]) {  //done
   let result = addTodo(todoText, todos);
 
   if (result.success) {
@@ -39,7 +39,7 @@ export function createHtml(todos: Todo[]) {
     "todos"
   ) as HTMLUListElement;
 
-  //todosContainer.innerHTML = "";
+  todosContainer.innerHTML = "";
 
   for (let i = 0; i < todos.length; i++) {
     let li: HTMLLIElement = document.createElement("li");
@@ -58,12 +58,12 @@ export function createHtml(todos: Todo[]) {
   }
 }
 
-export function toggleTodo(todo: Todo) { 
+export function toggleTodo(todo: Todo) {  //done
   changeTodo(todo);
   exports.createHtml(todos);
 }
 
-export function displayError(error: string, show: boolean) { 
+export function displayError(error: string, show: boolean) {  //done
   let errorContainer: HTMLDivElement = document.getElementById(
     "error"
   ) as HTMLDivElement;
@@ -77,7 +77,7 @@ export function displayError(error: string, show: boolean) {
   }
 }
 
-export function clearTodos(todos: Todo[]) { 
+export function clearTodos(todos: Todo[]) {  //done
   removeAllTodos(todos);
   exports.createHtml(todos);
 }
