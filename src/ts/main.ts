@@ -18,7 +18,7 @@ document.getElementById("clearTodos")?.addEventListener("click", () => {
     ).value;
     console.log("Todos when creating", todos);
 
-    createNewTodo(todoText, todos);
+    exports.createNewTodo(todoText, todos);
   }
 );
 
@@ -26,9 +26,9 @@ export function createNewTodo(todoText: string, todos: Todo[]) {
   let result = addTodo(todoText, todos);
 
   if (result.success) {
-    createHtml(todos);
+    exports.createHtml(todos);
   } else {
-    displayError(result.error, true); 
+    exports.displayError(result.error, true); 
   }
 }
 
@@ -60,7 +60,7 @@ export function createHtml(todos: Todo[]) {
 
 export function toggleTodo(todo: Todo) { 
   changeTodo(todo);
-  createHtml(todos);
+  exports.createHtml(todos);
 }
 
 export function displayError(error: string, show: boolean) { 
