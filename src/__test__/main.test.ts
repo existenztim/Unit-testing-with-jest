@@ -14,6 +14,31 @@ afterEach(() => {
 });
 
 /**
+ * Testing function "createHtml"
+ */
+
+test("Should create HTML for all todos in list",()=>{
+    
+    document.body.innerHTML = `<ul id="todos" class="todo"></ul>`;
+    const list: Todo[] = [
+        { text: 'Städa', done: false },
+        { text: 'Laga Mat', done: false },
+        { text: 'Sova', done: true }
+	];
+
+    const renderHtml = 
+    '<ul id="todos" class="todo">' +
+        '<li class="todo__text">Städa</li>' +
+        '<li class="todo__text">Laga Mat</li>' +
+        '<li class="todo__text--done todo__text">Sova</li>' +
+   '</ul>'
+
+    main.createHtml(list);
+
+    expect(document.body.innerHTML).toBe(renderHtml);
+})
+
+/**
  * Testing function "toggleTodo"
  */
 

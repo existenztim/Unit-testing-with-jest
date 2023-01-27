@@ -32,7 +32,7 @@ export function createNewTodo(todoText: string, todos: Todo[]) {  //done
   }
 }
 
-export function createHtml(todos: Todo[]) {
+export function createHtml(todos: Todo[]) { //done
   localStorage.setItem("todos", JSON.stringify(todos));
 
   let todosContainer: HTMLUListElement = document.getElementById(
