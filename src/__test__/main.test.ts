@@ -14,10 +14,41 @@ afterEach(() => {
 });
 
 /**
+ * Testing function "sortTodo"
+ */
+
+test("Should sort the list based on todoText",()=>{
+  
+    document.body.innerHTML = `<ul id="todos" class="todo"></ul>`;
+    // written unsorted on purpose
+    const sortedList: Todo[] = [
+        { text: 'Basta', done: false },
+        { text: 'Simma', done: false },
+        { text: 'Arbeta', done: false }
+	];
+    
+    const renderHtml = 
+    '<ul id="todos" class="todo">' +
+        '<li class="todo__text">Arbeta</li>' +
+        '<li class="todo__text">Basta</li>' +
+        '<li class="todo__text">Simma</li>' +
+   '</ul>'
+
+   main.createHtml(sortedList);
+   main.sortTodo(sortedList);
+
+   expect(document.body.innerHTML).toBe(renderHtml);
+   expect(sortedList[0].text).toBe("Arbeta");
+   expect(sortedList[1].text).toBe("Basta");
+   expect(sortedList[2].text).toBe("Simma");
+})
+/**
  * Testing function "createHtml"
  */
 
-test("Should create HTML for all todos in list",()=>{
+test("Should create HTML for all todos in list and call sort list",()=>{
+    
+    let spySortTodo = jest.spyOn(main, "sortTodo").mockReturnValue();
     
     document.body.innerHTML = `<ul id="todos" class="todo"></ul>`;
     const list: Todo[] = [
@@ -25,7 +56,7 @@ test("Should create HTML for all todos in list",()=>{
         { text: 'Laga Mat', done: false },
         { text: 'Sova', done: true }
 	];
-
+    
     const renderHtml = 
     '<ul id="todos" class="todo">' +
         '<li class="todo__text">Städa</li>' +
@@ -35,7 +66,9 @@ test("Should create HTML for all todos in list",()=>{
 
     main.createHtml(list);
 
-    expect(document.body.innerHTML).toBe(renderHtml);
+    expect(spySortTodo).toBeCalledTimes(1);
+    expect(spySortTodo).toHaveBeenCalled();
+    expect(document.body.innerHTML).toBe(renderHtml); //result should not be sorted yet
 })
 
 /**
@@ -108,27 +141,27 @@ describe("Scenarios for createNewTodo based on todo:Text length",()=>{
 describe("Should add/remove class depending on argument thrown", ()=>{
 
     test("IF true - Result will contains class show", () =>{
-        //arrange
+
         let errorMsg:string = "error";
         document.body.innerHTML = `
             <div id="error"></div>
         `;
-        //act
+      
         main.displayError(errorMsg,true);
-        //assert
+     
         let result = document.getElementById("error") as HTMLDivElement; //We know it exists 
         expect(result.classList.contains('show')).toBeTruthy();
 })
    
     test("IF false - Result will not contain class show", () =>{
-        //arrange
+      
         let errorMsg = "error";
         document.body.innerHTML = ` 
             <div id="error"></div>
         `;
-        //act
+       
         main.displayError(errorMsg,false);
-        //assert
+      
         let noResult = document.getElementById("error") as HTMLDivElement; 
         expect(noResult.classList.contains('show')).toBeFalsy();
     })

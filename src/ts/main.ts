@@ -32,6 +32,10 @@ export function createNewTodo(todoText: string, todos: Todo[]) {  //done
   }
 }
 
+export function sortTodo(todos: Todo[]){
+  todos.sort((a, b) => (a.text > b.text) ? 1 : -1);
+}
+
 export function createHtml(todos: Todo[]) { //done
   localStorage.setItem("todos", JSON.stringify(todos));
 
@@ -40,6 +44,7 @@ export function createHtml(todos: Todo[]) { //done
   ) as HTMLUListElement;
 
   todosContainer.innerHTML = "";
+  exports.sortTodo(todos);
 
   for (let i = 0; i < todos.length; i++) {
     let li: HTMLLIElement = document.createElement("li");
