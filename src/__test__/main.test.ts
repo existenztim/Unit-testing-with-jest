@@ -67,7 +67,6 @@ test("Should create HTML for all todos in list and call sort list",()=>{
     main.createHtml(list);
 
     expect(spySortTodo).toBeCalledTimes(1);
-    expect(spySortTodo).toHaveBeenCalled();
     expect(document.body.innerHTML).toBe(renderHtml); //result should not be sorted yet
 })
 
@@ -85,9 +84,7 @@ test("Should make toogleTodo call functions ",()=>{
     ;
     main.toggleTodo(todoItem);
     expect(spyCreateHtml).toBeCalledTimes(1);
-    expect(spyCreateHtml).toHaveBeenCalled();
     expect(spychangeTodo).toBeCalledTimes(1);
-    expect(spychangeTodo).toHaveBeenCalled();
 })
 
 /**
@@ -107,7 +104,6 @@ describe("Scenarios for createNewTodo based on todo:Text length",()=>{
 
         main.createNewTodo(todoText, todoList);
     
-        expect(spyCreateHtml).toHaveBeenCalled();
         expect(spyCreateHtml).toHaveBeenCalledTimes(1);
         expect(spyDisplayError).toBeCalledTimes(0);
         expect(result.error).toBe("");
@@ -124,7 +120,6 @@ describe("Scenarios for createNewTodo based on todo:Text length",()=>{
 
         main.createNewTodo(todoText, todoList);
     
-        expect(spyDisplayError).toHaveBeenCalled();
         expect(spyDisplayError).toHaveBeenCalledTimes(1);
         expect(spyDisplayError).toHaveBeenCalledWith(result.error, true);
         expect(result.error).toBe("Du måste ange minst tre bokstäver");
@@ -140,7 +135,7 @@ describe("Scenarios for createNewTodo based on todo:Text length",()=>{
 
 describe("Should add/remove class depending on argument thrown", ()=>{
 
-    test("IF true - Result will contains class show", () =>{
+    test("IF true - Result will contain class show", () =>{
 
         let errorMsg:string = "error";
         document.body.innerHTML = `
@@ -175,22 +170,14 @@ test("Check if functions is called 1 time", ()=>{
 
     let spyRemoveAllTodo = jest.spyOn(func, "removeAllTodos").mockReturnValue(); 
     let spyCreateHtml = jest.spyOn(main, "createHtml").mockReturnValue();
+    
     const list: Todo[] = [
         {text: 'todo1', done: false}, 
         {text: 'todo2', done: false}
     ];
-    //might remove
-    document.body.innerHTML = `
-    <ul class="todosContainer">
-        <li></li>
-        <li></li>
-    </ul> 
-    `;
 
     main.clearTodos(list);
 
     expect(spyCreateHtml).toBeCalledTimes(1);
-    expect(spyCreateHtml).toHaveBeenCalled();
     expect(spyRemoveAllTodo).toBeCalledTimes(1);
-    expect(spyRemoveAllTodo).toHaveBeenCalled();
 })

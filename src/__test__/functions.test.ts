@@ -15,6 +15,7 @@ describe("Should add or not add a new todo if todoText >2",() =>{
         addTodo(todoText,list);
     
         expect(list.length).toBe(length + 1);
+        expect(list[list.length-1].text).toBe("Äta mat");
     })
 
     test("Should not add new todo to todos array and display error message",()=>{
@@ -24,7 +25,7 @@ describe("Should add or not add a new todo if todoText >2",() =>{
     
         addTodo(todoText,list);
     
-        expect(list.length).toBe(length);
+        expect(list.length).toBe(length); //no change in length
     })
     
 })

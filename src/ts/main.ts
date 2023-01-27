@@ -1,7 +1,6 @@
-import { addTodo, changeTodo, removeAllTodos } from "./functions";
+import { addTodo, changeTodo, removeAllTodos} from "./functions";
 import { Todo } from "./models/Todo";
 
-//skapa init funktion?
 let todos: Todo[] = JSON.parse(localStorage.getItem("todos") || "[]");
 
 document.getElementById("clearTodos")?.addEventListener("click", () => {
