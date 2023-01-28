@@ -1,6 +1,10 @@
 import { IAddResponse } from "./models/IAddResult";
 import { Todo } from "./models/Todo";
 
+export function sortTodo(todos: Todo[]){
+  todos.sort((a, b) => (a.done > b.done) ? 1 : -1);
+}
+
 export function addTodo(todoText: string, todos: Todo[]): IAddResponse {
   if (todoText.length > 2) {
     let newTodo = new Todo(todoText, false);

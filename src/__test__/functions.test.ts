@@ -1,5 +1,51 @@
-import { changeTodo, removeAllTodos, addTodo } from "../ts/functions";
+/**
+* @jest-environment jsdom
+*/
+
+import { changeTodo, removeAllTodos, addTodo, sortTodo } from "../ts/functions";
+import * as main from "../ts/main";
 import { Todo } from "../ts/models/Todo";
+
+beforeEach(() =>{
+    document.body.innerHTML ="";
+})
+afterEach(() => {
+	jest.restoreAllMocks();
+});
+
+/**
+ * Testing function "sortTodo"
+ */
+
+test("Should sort the list based on property:done value",()=>{
+  
+    document.body.innerHTML = `<ul id="todos" class="todo"></ul>`;
+    // written unsorted on purpose
+    const sortedList: Todo[] = [
+        { text: 'Basta', done: false },
+        { text: 'Simma', done: true },
+        { text: 'Duscha', done: true },
+        { text: 'Arbeta', done: false }
+	];
+    
+    const renderHtml = 
+    '<ul id="todos" class="todo">' +
+        '<li class="todo__text">Arbeta</li>' +
+        '<li class="todo__text">Basta</li>' +
+        '<li class="todo__text--done todo__text">Duscha</li>' +
+        '<li class="todo__text--done todo__text">Simma</li>' +
+   '</ul>'
+   main.createHtml(sortedList);
+   sortTodo(sortedList);
+
+   expect(document.body.innerHTML).toBe(renderHtml);
+   expect(sortedList[0].done).toBe(false);
+   expect(sortedList[1].done).toBe(false);
+   //true values should come last
+   expect(sortedList[2].done).toBe(true);
+   expect(sortedList[3].done).toBe(true);
+})
+
 
 /**
  * Testing function "addTodo"

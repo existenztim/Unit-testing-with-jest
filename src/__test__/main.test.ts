@@ -14,41 +14,13 @@ afterEach(() => {
 });
 
 /**
- * Testing function "sortTodo"
- */
-
-test("Should sort the list based on todoText",()=>{
-  
-    document.body.innerHTML = `<ul id="todos" class="todo"></ul>`;
-    // written unsorted on purpose
-    const sortedList: Todo[] = [
-        { text: 'Basta', done: false },
-        { text: 'Simma', done: false },
-        { text: 'Arbeta', done: false }
-	];
-    
-    const renderHtml = 
-    '<ul id="todos" class="todo">' +
-        '<li class="todo__text">Arbeta</li>' +
-        '<li class="todo__text">Basta</li>' +
-        '<li class="todo__text">Simma</li>' +
-   '</ul>'
-
-   main.createHtml(sortedList);
-   main.sortTodo(sortedList);
-
-   expect(document.body.innerHTML).toBe(renderHtml);
-   expect(sortedList[0].text).toBe("Arbeta");
-   expect(sortedList[1].text).toBe("Basta");
-   expect(sortedList[2].text).toBe("Simma");
-})
-/**
  * Testing function "createHtml"
  */
 
+// lägg till mocking för eventlystnare?
 test("Should create HTML for all todos in list and call sort list",()=>{
     
-    let spySortTodo = jest.spyOn(main, "sortTodo").mockReturnValue();
+    let spySortTodo = jest.spyOn(func, "sortTodo").mockReturnValue();
     
     document.body.innerHTML = `<ul id="todos" class="todo"></ul>`;
     const list: Todo[] = [
